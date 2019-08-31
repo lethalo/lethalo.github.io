@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>lethal&#39;s Blog</title>
+    <title>加密与解密笔记 · lethal&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >lethal&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">加密与解密笔记</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>lethal's Blog.</a>
 </header>
@@ -220,24 +231,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            加密与解密笔记
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">580</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/08/09</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,123 +393,99 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/27/Hgame-week1/" >
-            
-                <span>Hgame_week1</span>
-        </a>
-        <div class="abstract-content">
-            Hgame_week1WEB0x00 Are you from Europe?
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="win32"><a href="#win32" class="headerlink" title="win32"></a>win32</h2><ul>
+<li>常见API函数</li>
+</ul>
+<p>1.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hmemcpy</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">void</span> _huge *hpvDest, <span class="comment">//目的数据地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="keyword">void</span> _huge *hpvScoure, <span class="comment">//源数据地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">long</span> cbCopyn <span class="comment">//数据大小（字节）</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
 
-按人品当然是不存在的
+<p>2.<code>GetWindowText函数</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetWindowText</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    HWND hWnd,  <span class="comment">//窗口或文本控制句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">    LPTSTR lpString,    <span class="comment">//缓冲区地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> nMaxCount   <span class="comment">//复制的最大字符数</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
 
-
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/27</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/16/MD简单语法/" >
-            
-                <span>MD简单语法</span>
-        </a>
-        <div class="abstract-content">
-            <p><strong>写博客的第一步学些简单MD语法</strong></p>
-<h1 id="支持html"><a href="#支持html" class="headerlink" title="支持html"></a>支持html</h1><p><img src="http://oz9a2vh6o.bkt.clouddn.com/photo_eff34fad9c84c32708066474101afa36.png" alt></p>
-<hr>
-<p>这是一个普通段落。</p>
-<table>
-    <tr>
-        <td>Foo</td>
-    </tr>
-</table>
-
-<p>这是另一个普通段落。</p>
-<hr>
-<p><img src="http://oz9a2vh6o.bkt.clouddn.com/photo_d26cc23e01e48a7b566d902b1fc8082a.png" alt></p>
-<hr>
-<h1 id="This-is-an-H1-最高阶标题"><a href="#This-is-an-H1-最高阶标题" class="headerlink" title="This is an H1(最高阶标题)"></a>This is an H1(最高阶标题)</h1><h2 id="This-is-an-H2-第二阶标题"><a href="#This-is-an-H2-第二阶标题" class="headerlink" title="This is an H2(第二阶标题)"></a>This is an H2(第二阶标题)</h2><h1 id="这是H1"><a href="#这是H1" class="headerlink" title="这是H1"></a>这是H1</h1><h2 id="这是H2"><a href="#这是H2" class="headerlink" title="这是H2"></a>这是H2</h2><h6 id="这是H6"><a href="#这是H6" class="headerlink" title="这是H6"></a>这是H6</h6><p>（闭合标题，美观用）</p>
-<h1 id="这是H1-1"><a href="#这是H1-1" class="headerlink" title="这是H1"></a>这是H1</h1><h2 id="这是H2-1"><a href="#这是H2-1" class="headerlink" title="这是H2"></a>这是H2</h2><h3 id="这是H3"><a href="#这是H3" class="headerlink" title="这是H3"></a>这是H3</h3><hr>
-<h1 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h1><h1 id="first"><a href="#first" class="headerlink" title="first"></a>first</h1><blockquote>
-<p>This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,<br>consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.<br>Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</p>
-<p>Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse<br>id sem consectetuer libero luctus adipiscing.</p>
-</blockquote>
-<h1 id="second"><a href="#second" class="headerlink" title="second"></a>second</h1><blockquote>
-<p>This is the first level of quoting.</p>
 <blockquote>
-<p>This is nested blockquote.</p>
+<p>返回值：如果成功就返回文本长度，失败则返回零</p>
 </blockquote>
-<p>Back to the first level.</p>
+<p>3.<code>GetDlgItem函数</code></p>
+<ul>
+<li>获取指定对话框的句柄。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HWND <span class="title">GetDlogItem</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    HWND hDlg,  <span class="comment">//对话框句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> nIDDlogItem <span class="comment">//控件标识</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>成功返回对话框句柄，失败返回零</p>
 </blockquote>
-<h1 id="third"><a href="#third" class="headerlink" title="third"></a>third</h1><blockquote>
-<h2 id="这是一个标题"><a href="#这是一个标题" class="headerlink" title="这是一个标题"></a>这是一个标题</h2><ol>
-<li>这是第一行列表项</li>
-<li>这是第二列表项</li>
-</ol>
-<p>给出一些代码：</p>
-<pre><code>return shell_exec(&quot;echo $input | $markdown_script&quot;);</code></pre></blockquote>
-<hr>
-<p><img src="http://oz9a2vh6o.bkt.clouddn.com/photo_d88fb494555e0afc2101b04a710fdb32.png" alt></p>
-<hr>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="无序表-1"><a href="#无序表-1" class="headerlink" title="无序表(1)"></a>无序表(1)</h2><ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<h2 id="无序表-2"><a href="#无序表-2" class="headerlink" title="无序表(2)"></a>无序表(2)</h2></li>
-</ul>
+<p>4.<code>GetDlgItemText函数</code></p>
 <ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<h2 id="无序表-3"><a href="#无序表-3" class="headerlink" title="无序表(3)"></a>无序表(3)</h2></li>
+<li>获取对话框文本</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">UINT <span class="title">GetDlogItemText</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    HWND hDlg,  <span class="comment">//对话框句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> nIDDlgItem, <span class="comment">//控件标识（ID号）</span></span></span></span><br><span class="line"><span class="function"><span class="params">    LPTBTR lpString,    <span class="comment">//文本缓冲区指针</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> nMaxCount   <span class="comment">//字符缓冲区的长度</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>成功返回文本长度，失败返回零</p>
+</blockquote>
+<p>5.<code>GetDlgItemInt函数</code></p>
 <ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue</li>
+<li>获取对话框整数值</li>
 </ul>
-<h2 id="有序表"><a href="#有序表" class="headerlink" title="有序表"></a>有序表</h2><ol>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<ol>
-<li>Bird</li>
-<li>McHale</li>
-<li>Parish</li>
-</ol></li>
-<li>Bird</li>
-<li>McHale</li>
-<li>Parish
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">UINT <span class="title">GetDlgItemInt</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    HWND hDlg,  <span class="comment">//对话框句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> nIDDlgItem, <span class="comment">//控件标识</span></span></span></span><br><span class="line"><span class="function"><span class="params">    BOOL *lpTranslated, <span class="comment">//接收成功/失败指示的指针</span></span></span></span><br><span class="line"><span class="function"><span class="params">    BOOL bSigned    <span class="comment">//指定是有符号数还是无符号数</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果成功，lpTranslated被设置为True,返回文本对应的整数值，如果失败，lpTranslated被设置为FALSE，返回零</p>
+</blockquote>
+<p>6.<code>MessageBox函数</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MessageBox</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    HWND hWnd,  <span class="comment">//父窗口句柄</span></span></span></span><br><span class="line"><span class="function"><span class="params">    LPCTSTR lpText, <span class="comment">//消息框文本地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">    LPCTSTR lpCaption,  <span class="comment">//消息框标题地址</span></span></span></span><br><span class="line"><span class="function"><span class="params">    UINT uType  <span class="comment">//消息框样式</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="什么是句柄"><a href="#什么是句柄" class="headerlink" title="什么是句柄"></a>什么是句柄</h3><blockquote>
+<p>句柄（Handle）是Windows标识，由应用程序建立或使用的的对象所使用的一个唯一的整数值（通常为32位）。Windows要使用各种各样的句柄来标识诸如应用程序、窗口、图标、菜单、输出设备、文件等对象。程序通过windows函数获取句柄，然后在其他windows函数中使用这个句柄，以引用它所代表的对象。</p>
+</blockquote>
+<p><em>MessageBoxW函数内部（Windows 9x）</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MessageBoxW</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	MessageBoxExW(	<span class="comment">//调用MessageBoxExW()函数</span></span></span></span><br><span class="line"><span class="function"><span class="params">		WideCharToMultiByte();	<span class="comment">//取得Unicode字符串的长度</span></span></span></span><br><span class="line"><span class="function"><span class="params">		GlobalAlloc();	<span class="comment">//按字符长度分配内存</span></span></span></span><br><span class="line"><span class="function"><span class="params">		WideCharToMultiByte();	<span class="comment">//按字符串转换成ANSI字符串</span></span></span></span><br><span class="line"><span class="function"><span class="params">		WideCharToMultiByte();	<span class="comment">//取得Unicode字符串长度</span></span></span></span><br><span class="line"><span class="function"><span class="params">		GlobalAlloc();		<span class="comment">//分配内存</span></span></span></span><br><span class="line"><span class="function"><span class="params">		WideCharToMultiByte();	<span class="comment">//按字符串转换成ANSI字符串</span></span></span></span><br><span class="line"><span class="function"><span class="params">		MessageBoxExA();	<span class="comment">//最终还是调用ANSI版的MessageBoxExA函数</span></span></span></span><br><span class="line"><span class="function"><span class="params">		GlobalFree();	<span class="comment">//释放内存</span></span></span></span><br><span class="line"><span class="function"><span class="params">		GlobalFree();	<span class="comment">//释放内存</span></span></span></span><br><span class="line"><span class="function"><span class="params">	)</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><em>MessageBoxA函数内部（Windows 2000）</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MessageBoxA</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	MessageBoxExA(	<span class="comment">//调用MessageBoxExA函数</span></span></span></span><br><span class="line"><span class="function"><span class="params">		MBToWCSEx()	<span class="comment">//将消息框主体文字转换成unicode</span></span></span></span><br><span class="line"><span class="function"><span class="params">		MBToWCSEx()	<span class="comment">//将消息框标题栏上的文字转换成unicode</span></span></span></span><br><span class="line"><span class="function"><span class="params">		MessageBoxExW()	<span class="comment">//调用MessageBoxExW函数</span></span></span></span><br><span class="line"><span class="function"><span class="params">		HeadFree()	<span class="comment">//释放内存</span></span></span></span><br><span class="line"><span class="function"><span class="params">	)</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://yoursite.com">John Doe</a>
+            <p>原文链接：<a href="http://yoursite.com/2018/08/09/加密与解密笔记/">http://yoursite.com/2018/08/09/加密与解密笔记/</a>
+            <p>发表日期：<a href="http://yoursite.com/2018/08/09/加密与解密笔记/">August 9th 2018, 4:08:26 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2018/08/09/加密与解密笔记/">August 9th 2018, 4:50:54 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/08/Googlectf2018/" title= "Googlectf2018">
+                    <div class="prevTitle">Googlectf2018</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -532,6 +563,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#win32"><span class="toc-number">1.</span> <span class="toc-text">win32</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是句柄"><span class="toc-number">1.1.</span> <span class="toc-text">什么是句柄</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -889,6 +938,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
