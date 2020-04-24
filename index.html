@@ -359,6 +359,69 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/04/24/BUUCTF/" >
+            
+                <span>BUUCTF</span>
+        </a>
+        <div class="abstract-content">
+            web[强网杯 2019]随便注
+测试网站发现inject参数存在注入
+
+测试显示字段
+
+
+  
+
+显示的字段只有两个，尝试联合注入
+
+
+
+发现过滤了一些语句和字符，尝试堆注入.
+
+
+  1';show tables;#
+
+
+
+
+
+
+得到表信息，查看表中的字段，这里在查询数字名表时需要使用反引号.
+
+
+  1';show columns from `1919810931114514`;
+
+
+
+
+
+
+使用concat()和char()能够进行拼接或者变量传递，然后使用预处理语句进行执行语句。
+
+  1';PREPARE sql from concat(char(115,101,108,10...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/04/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "writeup">writeup</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/08/09/加密与解密笔记/" >
             
                 <span>加密与解密笔记</span>
@@ -699,40 +762,6 @@ check3()
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/03/06/dfs-走迷宫/" >
-            
-                <span>dfs_走迷宫</span>
-        </a>
-        <div class="abstract-content">
-            dfs(深搜)
-代码框架
-
-1234567891011121314// 对坐标为(x, y)的点进行搜索void dfs(int x, int y) &#123;    if (x,y) 是终点 &#123;        方案数增加        return;    &#125;    标记(x, y)已经访问    for (x, y) 能到达的格子(tx, ty) &#123;        if (tx, ty) 没有访问 &#123;            dfs(tx, ty);        &#125;    &#125;    取消(x, y)访问标记&#125;
-
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "dfs,c语言">dfs,c语言</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -1064,9 +1093,28 @@ check3()
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -1076,6 +1124,20 @@ check3()
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2020/04/24/BUUCTF/" >BUUCTF</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
@@ -1102,12 +1164,12 @@ check3()
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/iscc-writeup/" >iscc_writeup</a>
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/ciscn-wp/" >ciscn_wp</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/ciscn-wp/" >ciscn_wp</a>
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/iscc-writeup/" >iscc_writeup</a>
         </li>
     
     
@@ -1150,17 +1212,19 @@ check3()
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
+    
         <span class="sidebar-tag-name" data-tags="Reerse"><span class="iconfont-archer">&#xe606;</span>Reerse</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
+    
+        <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
     
         <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
     
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
         <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
-    
-        <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
-    
-        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
