@@ -346,31 +346,56 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/03/06/Reversing-kr-Write-UP/" >
+        <a class="abstract-title" href = "/2020/04/24/BUUCTF/" >
             
-                <span>Reversing.kr_Write_UP</span>
+                <span>BUUCTF</span>
         </a>
         <div class="abstract-content">
-            Easy_CrackMe大致功能只是strcmp的checkEa5yR3versing
-Easy_KeygenDescription
-ReversingKr KeygenMeFind the Name when the Serial is 5B134977135E7D13
+            web[强网杯 2019]随便注
+测试网站发现inject参数存在注入
 
-Soulution
-破解name和serial 之间的运算关系
+测试显示字段
 
-简单算法,上py
-12345678serial = ["5B","13","49","77","13","5E","7D","13"]key = [16,32,48]name=""j=0for i in serial:	name+=chr(int(i,...
+
+
+
+显示的字段只有两个，尝试联合注入
+
+
+
+发现过滤了一些语句和字符，尝试堆注入.
+
+
+  1';show tables;#
+
+![Snip20200425_8](https://i.loli.net/2020/04/25/KmeVbpcFqWyN16Y.png)
+
+
+
+
+
+得到表信息，查看表中的字段，这里在查询数字名表时需要使用反引号.
+
+
+  1';show columns from `1919810931114514`;
+
+
+
+
+
+
+使用concat()和char()能够进行拼接或者变量传递...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/06</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/04/24</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Writeup">Writeup</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "writeup">writeup</a>
     
 </div>
             
@@ -617,6 +642,10 @@ Soulution
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 14
@@ -659,12 +688,12 @@ Soulution
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题/" >BugkuCTF刷题</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题_Reverse/" >BugkuCTF刷题_Reverse</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题_Reverse/" >BugkuCTF刷题_Reverse</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题/" >BugkuCTF刷题</a>
         </li>
     
     
@@ -725,9 +754,9 @@ Soulution
     
         <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
     
-        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
-    
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
     
         <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
     
@@ -791,17 +820,6 @@ jsonContent:
     <!-- busuanzi  -->
     
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
-    </div>
-    <!-- async load share.js -->
-     
-    </body>
-</html>
-
-
-busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <!-- CNZZ  -->
     

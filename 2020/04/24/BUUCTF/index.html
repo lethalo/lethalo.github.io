@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">144</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">154</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,21 +407,22 @@ height:50vh;
 <li><p>测试显示字段</p>
 </li>
 </ul>
-<p>  <img src="https://raw.githubusercontent.com/lethalo/images/master/20200425001136.png?token=AFYR2GX46NBJIP3KAAP4VQS6UMH7Q" alt></p>
+<p><img src="https://i.loli.net/2020/04/25/RNrPSuGAfZ4a169.png" alt="Snip20200425_7"></p>
 <ul>
 <li>显示的字段只有两个，尝试联合注入</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/lethalo/images/master/20200425000038.png?token=AFYR2GUGP3YB66FWEPDWCMS6UMGWK" alt></p>
+<p><img src="https://i.loli.net/2020/04/25/3VdXkJohbgwBHP7.png" alt="Snip20200425_6"></p>
 <ul>
 <li>发现过滤了一些语句和字符，尝试堆注入.</li>
 </ul>
 <p>
   1';show tables;#
 </p>
+![Snip20200425_8](https://i.loli.net/2020/04/25/KmeVbpcFqWyN16Y.png)
 
 
 
-<p><img src="https://raw.githubusercontent.com/lethalo/images/master/20200425002556.png?token=AFYR2GVLTA3YHURPVKAC4SS6UMJVI" alt></p>
+
 <ul>
 <li>得到表信息，查看表中的字段，这里在查询数字名表时需要使用反引号.</li>
 </ul>
@@ -431,16 +432,17 @@ height:50vh;
 
 
 
-<p><img src="https://raw.githubusercontent.com/lethalo/images/master/20200425003025.png?token=AFYR2GVEXO5CCXASZGTI6OK6UMKGA" alt></p>
+<p><img src="https://i.loli.net/2020/04/25/VKWvbk5xerFNPAp.png" alt="Snip20200425_9"></p>
 <ul>
 <li><p>使用<code>concat()</code>和<code>char()</code>能够进行拼接或者变量传递，然后使用预处理语句进行执行语句。</p>
 <p>
-  1';PREPARE sql from concat(char(115,101,108,101,99,116), ' * from `1919810931114514` ');EXECUTE sql;#
+  1';PREPARE aa from concat(char(115,101,108,101,99,116), ' * from `1919810931114514` ');EXECUTE aa;#
 </p>
 
-<p><img src="https://raw.githubusercontent.com/lethalo/images/master/20200425010726.png?token=AFYR2GQZDS5TRARMVTCLSNC6UMOQ2" alt></p>
+
 </li>
 </ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge5e5q8cv5j30gd09uq3r.jpg" alt="Snip20200425_10"></p>
 
     </article>
     <!-- license  -->
@@ -449,7 +451,7 @@ height:50vh;
             <p>Author：<a href="http://yoursite.com">Lethal</a>
             <p>原文链接：<a href="http://yoursite.com/2020/04/24/BUUCTF/">http://yoursite.com/2020/04/24/BUUCTF/</a>
             <p>发表日期：<a href="http://yoursite.com/2020/04/24/BUUCTF/">April 24th 2020, 11:22:38 pm</a>
-            <p>更新日期：<a href="http://yoursite.com/2020/04/24/BUUCTF/">April 25th 2020, 1:09:38 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/04/24/BUUCTF/">April 25th 2020, 2:01:00 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -737,6 +739,10 @@ top:50vh;
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 14
@@ -779,12 +785,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题/" >BugkuCTF刷题</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题_Reverse/" >BugkuCTF刷题_Reverse</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题_Reverse/" >BugkuCTF刷题_Reverse</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2018/07/30/BugkuCTF刷题/" >BugkuCTF刷题</a>
         </li>
     
     
@@ -845,9 +851,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
     
-        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
-    
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
     
         <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
     
