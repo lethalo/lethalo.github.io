@@ -351,42 +351,11 @@
                 <span>BUUCTF</span>
         </a>
         <div class="abstract-content">
-            web[强网杯 2019]随便注
-测试网站发现inject参数存在注入
-
-测试显示字段
+            web[HCTF 2018]WarmUp
+打开网站，在源代码中看到source.php
 
 
-
-
-显示的字段只有两个，尝试联合注入
-
-
-
-发现过滤了一些语句和字符，尝试堆注入.
-
-
-  1';show tables;#
-
-
-
-
-
-
-
-得到表信息，查看表中的字段，这里在查询数字名表时需要使用反引号.
-
-
-  1';show columns from `1919810931114514`;
-
-
-
-
-
-
-使用concat()和char()能够进行拼接或者变量传递，然后使用预处理语句进行执行语句。
-
-  1';PREPARE aa from concat(char(115,101,108,101,...
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&lt;?php    highlight_file(__FILE__);    class emmm    &#123;        public static function checkFile(&amp;$page)        &#123;            $whitelist = ["source"=...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1098,19 +1067,19 @@ check3()
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
-    
-        <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
-    
-        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
-    
-        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
+        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
     
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
-        <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
+        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
+    
+        <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
+    
+        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
     
         <span class="sidebar-tag-name" data-tags="Reerse"><span class="iconfont-archer">&#xe606;</span>Reerse</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
